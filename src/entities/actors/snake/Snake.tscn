@@ -15,6 +15,22 @@ BODY_SEGMENT_NP = ExtResource( 2 )
 
 [node name="Head" parent="." instance=ExtResource( 1 )]
 
+[node name="BodySegment" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 16 )
+PREV_SEGMENT_NP = NodePath("../Head")
+
+[node name="BodySegment2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 32 )
+PREV_SEGMENT_NP = NodePath("../BodySegment")
+
+[node name="BodySegment3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 48 )
+PREV_SEGMENT_NP = NodePath("../BodySegment2")
+
+[node name="BodySegment4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 64 )
+PREV_SEGMENT_NP = NodePath("../BodySegment3")
+
 [node name="Path" type="Path2D" parent="."]
 curve = SubResource( 1 )
 

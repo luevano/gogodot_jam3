@@ -33,6 +33,7 @@ config/icon="res://icons/game.png"
 [autoload]
 
 Event="*res://event.gd"
+Global="*res://global.gd"
 
 [debug]
 
