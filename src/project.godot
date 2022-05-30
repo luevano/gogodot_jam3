@@ -13,15 +13,32 @@ _global_script_classes=[ {
 "class": "Main",
 "language": "GDScript",
 "path": "res://main.gd"
+}, {
+"base": "Node2D",
+"class": "Snake",
+"language": "GDScript",
+"path": "res://entities/actors/snake/snake.gd"
 } ]
 _global_script_class_icons={
-"Main": ""
+"Main": "",
+"Snake": ""
 }
 
 [application]
 
 config/name="GoGodotJam3"
+run/main_scene="res://Main.tscn"
 config/icon="res://icons/game.png"
+
+[autoload]
+
+Event="*res://event.gd"
+
+[debug]
+
+gdscript/warnings/unused_argument=false
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
 
 [gui]
 
@@ -33,6 +50,29 @@ texture={
 "detect_3d": false,
 "flags/filter": false,
 "process/fix_alpha_border": false
+}
+
+[input]
+
+move_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
 }
 
 [physics]

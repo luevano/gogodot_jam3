@@ -1,73 +1,43 @@
 class_name Snake
-extends KinematicBody2D
+extends Node2D
 
-export(float, 10.0, 1000.0, 10.0) var SPEED: float = 100.0
+export(float, 1.0, 1000.0, 1.0) var SPEED: float = 100.0
+export(float, 1.0, 1000.0, 1.0) var ROT_SPEED: float = 200.0
+export(float, 0.01, 1.0, 0.01) var POSITION_UPDATE_INTERVAL: float = 0.01
+export(PackedScene) var BODY_SEGMENT_NP: PackedScene
 
-var velocity: Vector2 = Vector2.ZERO
-
-enum {
-	NULL=-1,
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
-}
-
-var direction: Dictionary = {
-	UP: Vector2.UP,
-	DOWN: Vector2.DOWN,
-	LEFT: Vector2.LEFT,
-	RIGHT: Vector2.RIGHT
-}
-
-var _direction_state: int = UP
-var _input_direction: int = NULL
+onready var head: Node2D = $Head
+onready var path: Path2D = $Path
+onready var path_follow: PathFollow2D = $Path/PathFollow
+onready var curve: Curve2D = Curve2D.new()
 
 
-func _physics_process(delta: float) -> void:
-	_input_direction = _get_direction_input()
-
-	match _direction_state:
-		NULL:
-			print("No input detected, not changing direction.")
-		UP:
-			if _input_direction == LEFT or _input_direction == RIGHT:
-				_change_direction_to(_input_direction)
-		DOWN:
-			if _input_direction == LEFT or _input_direction == RIGHT:
-				_change_direction_to(_input_direction)
-		LEFT:
-			if _input_direction == UP or _input_direction == DOWN:
-				_change_direction_to(_input_direction)
-		RIGHT:
-			if _input_direction == UP or _input_direction == DOWN:
-				_change_direction_to(_input_direction)
-
-	move_and_slide(SPEED * direction[_direction_state], Vector2.ZERO, false, 4, PI/4, false)
+func _ready():
+	Event.connect("new_curve_point", self, "_on_Head_new_curve_point")
+	path.curve = curve
+	head.speed = SPEED
+	head.rot_speed = ROT_SPEED
+	head.position_update_interval = POSITION_UPDATE_INTERVAL
+	set_process(false)
 
 
-func _change_direction_to(new_direction: int) -> void:
-	_direction_state = new_direction
-
-	match _direction_state:
-		UP:
-			rotation = 0
-		DOWN:
-			rotation = PI
-		LEFT:
-			rotation = -PI/2
-		RIGHT:
-			rotation = PI/2
+func _process(delta: float) -> void:
+	path_follow.set_offset(path_follow.get_offset() + SPEED * delta)
 
 
-func _get_direction_input() -> int:
-	if Input.is_action_pressed("move_up"):
-		return UP
-	elif Input.is_action_pressed("move_down"):
-		return DOWN
-	elif Input.is_action_pressed("move_left"):
-		return LEFT
-	elif Input.is_action_pressed("move_right"):
-		return RIGHT
+func _draw() -> void:
+	if path.curve.get_baked_points().size() >= 2:
+		draw_polyline(path.curve.get_baked_points(), Color.aquamarine, 1, true)
 
-	return NULL
+
+func add_point_to_curve(coordinates: Vector2) -> void:
+	path.curve.add_point(coordinates)
+	# need at least 2 points to enable processing (sprite move)
+	if not is_processing() and path.curve.get_baked_points().size() >= 2:
+		set_process(true)
+	# update call is to draw curve
+	update()
+
+
+func _on_Head_new_curve_point(coordinates: Vector2) -> void:
+	add_point_to_curve(coordinates)

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/game.png-6739b0851bf2cd8cdf086437458257a1.stex"
+path="res://.import/1x1.png-6e89afd7f217fca93b741eefef4d6779.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/game.png"
-dest_files=[ "res://.import/game.png-6739b0851bf2cd8cdf086437458257a1.stex" ]
+source_file="res://entities/actors/snake/body_segment/1x1.png"
+dest_files=[ "res://.import/1x1.png-6e89afd7f217fca93b741eefef4d6779.stex" ]
 
 [params]
 
