@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://entities/actors/snake/scenes/Head.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/actors/snake/scenes/Body.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/actors/snake/scripts/snake.gd" type="Script" id=3]
+[ext_resource path="res://entities/actors/snake/scenes/Tail.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[node name="Snake" type="Node2D"]
+script = ExtResource( 3 )
+BODY_SEGMENT_NP = ExtResource( 2 )
+TAIL_SEGMENT_NP = ExtResource( 4 )
+
+[node name="Path" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="Head" parent="." instance=ExtResource( 1 )]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://entities/actors/snake/sprites/tail.png" type="Texture" id=1]
+[ext_resource path="res://entities/actors/snake/scripts/generic_segment.gd" type="Script" id=2]
+
+[node name="TailPathFollow" type="PathFollow2D"]
+loop = false
+script = ExtResource( 2 )
+TYPE = "tail"
+
+[node name="Tail" type="Node2D" parent="."]
+rotation = 1.5708
+
+[node name="Sprite" type="Sprite" parent="Tail"]
+texture = ExtResource( 1 )

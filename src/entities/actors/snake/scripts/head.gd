@@ -8,10 +8,6 @@ var _direction: Vector2 = Vector2.UP
 var _time_elapsed: float = 0.0
 
 
-func _ready():
-	Event.emit_signal("new_curve_point", global_position)
-
-
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("move_left"):
 		# _direction = _direction.rotated(deg2rad(-ROT_SPEED))
