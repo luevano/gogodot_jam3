@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://entities/actors/snake/scenes/Snake.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/GifMaker/GifRecorder.gd" type="Script" id=2]
-[ext_resource path="res://addons/GifMaker/GifRectangle.gd" type="Script" id=3]
+[ext_resource path="res://tools/ScreenRecorder.tscn" type="PackedScene" id=2]
 [ext_resource path="res://main.gd" type="Script" id=4]
-[ext_resource path="res://screen_recorder.gd" type="Script" id=5]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
@@ -15,28 +13,4 @@ script = ExtResource( 4 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
 
-[node name="ScreenRecorder" type="CanvasLayer" parent="."]
-script = ExtResource( 5 )
-
-[node name="Control" type="Control" parent="ScreenRecorder"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="GifRectangle" type="ReferenceRect" parent="ScreenRecorder/Control"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -64.0
-margin_top = -64.0
-margin_right = 64.0
-margin_bottom = 64.0
-script = ExtResource( 3 )
-
-[node name="GifRecorder" type="Viewport" parent="ScreenRecorder/Control"]
-size = Vector2( 128, 128 )
-script = ExtResource( 2 )
-render_type = 1
-seconds = 2.0
-autostart = true
-capture_node_path = NodePath("../GifRectangle")
+[node name="ScreenRecorder" parent="." instance=ExtResource( 2 )]
