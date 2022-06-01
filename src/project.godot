@@ -10,6 +10,21 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "GifDecoder",
+"language": "GDScript",
+"path": "res://addons/GifMaker/GifDecoder.gd"
+}, {
+"base": "Viewport",
+"class": "GifRecorder",
+"language": "GDScript",
+"path": "res://addons/GifMaker/GifRecorder.gd"
+}, {
+"base": "ReferenceRect",
+"class": "GifRectangle",
+"language": "GDScript",
+"path": "res://addons/GifMaker/GifRectangle.gd"
+}, {
+"base": "Node",
 "class": "Main",
 "language": "GDScript",
 "path": "res://main.gd"
@@ -20,6 +35,9 @@ _global_script_classes=[ {
 "path": "res://entities/actors/snake/scripts/snake.gd"
 } ]
 _global_script_class_icons={
+"GifDecoder": "",
+"GifRecorder": "res://addons/GifMaker/gif.svg",
+"GifRectangle": "res://addons/GifMaker/GifRectangle.svg",
 "Main": "",
 "Snake": ""
 }
@@ -40,6 +58,10 @@ Global="*res://global.gd"
 gdscript/warnings/unused_argument=false
 gdscript/warnings/unused_signal=false
 gdscript/warnings/return_value_discarded=false
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/GifMaker/plugin.cfg" )
 
 [gui]
 
