@@ -18,9 +18,11 @@ var body_segment_queue: Array
 func _ready():
 	set_physics_process(false)
 	set_process_input(false)
-	Event.connect("snake_path_new_point", self, "_on_Head_snake_path_new_point")
-	Event.connect("snake_added_new_segment", self, "_on_Snake_snake_added_new_segment")
-	Event.connect("snake_added_initial_segments", self, "_on_Snake_snake_added_initial_segments")
+	Event.connect("snake_path_new_point", self, "_on_snake_path_new_point")
+	Event.connect("snake_added_new_segment", self, "_on_snake_added_new_segment")
+	Event.connect("snake_added_initial_segments", self, "_on_snake_added_initial_segments")
+
+	Event.connect("food_eaten", self, "_on_food_eaten")
 
 
 func _physics_process(delta: float) -> void:
@@ -42,7 +44,7 @@ func _add_new_segment() -> void:
 	var _path_length_threshold: float = body_segment_queue[0] + Global.SNAKE_SEGMENT_SIZE
 	if path.curve.get_baked_length() >= _path_length_threshold:
 		var _temp_body_segment: PathFollow2D = BODY_SEGMENT_NP.instance()
-		Event.emit_signal("snake_add_new_segment", "body")
+		Event.emit_signal("snake_adding_new_segment", "body")
 		var _new_body_offset: float = body_segment_stack.back().offset - Global.SNAKE_SEGMENT_SIZE
 
 		_temp_body_segment.offset = _new_body_offset
@@ -58,7 +60,7 @@ func _add_new_segment() -> void:
 func _add_initial_segment(type: PackedScene) -> void:
 	if path.curve.get_baked_length() >= (current_body_segments + 1.0) * Global.SNAKE_SEGMENT_SIZE:
 		var _temp_body_segment: PathFollow2D = type.instance()
-		Event.emit_signal("snake_add_new_segment", _temp_body_segment.TYPE)
+		Event.emit_signal("snake_adding_new_segment", _temp_body_segment.TYPE)
 		if _temp_body_segment.TYPE == "body":
 			body_segment_stack.append(_temp_body_segment)
 		else:
@@ -78,7 +80,7 @@ func _add_segment_to_queue() -> void:
 		body_segment_queue.append(body_segment_queue.back() + Global.SNAKE_SEGMENT_SIZE)
 
 
-func _on_Head_snake_path_new_point(coordinates: Vector2) -> void:
+func _on_snake_path_new_point(coordinates: Vector2) -> void:
 	path.curve.add_point(coordinates)
 	# update call is to draw curve as there are new points to the path's curve
 	update()
@@ -89,11 +91,15 @@ func _on_Head_snake_path_new_point(coordinates: Vector2) -> void:
 		_add_initial_segment(TAIL_SEGMENT_NP)
 
 
-func _on_Snake_snake_added_new_segment(type: String) -> void:
+func _on_snake_added_new_segment(type: String) -> void:
 	if type == "tail":
 		Event.emit_signal("snake_added_initial_segments")
 
 
-func _on_Snake_snake_added_initial_segments() -> void:
+func _on_snake_added_initial_segments() -> void:
 	set_physics_process(true)
 	set_process_input(true)
+
+
+func _on_food_eaten(type: int) -> void:
+	_add_segment_to_queue()
