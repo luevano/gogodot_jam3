@@ -4,8 +4,8 @@
 [ext_resource path="res://entities/actors/snake/scripts/generic_segment.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 4.99999
-height = 4.00002
+radius = 1.99999
+height = 2.00001
 
 [node name="BodyPathFollow" type="PathFollow2D"]
 loop = false

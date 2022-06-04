@@ -5,6 +5,7 @@ enum {
 	RIGHT=1
 }
 
+var _initial_speed: float = Global.SNAKE_SPEED
 var velocity: Vector2 = Vector2.ZERO
 var _direction: Vector2 = Vector2.UP
 var _time_elapsed: float = 0.0
@@ -26,6 +27,7 @@ func _physics_process(delta: float) -> void:
 func _rotate_to(direction: int) -> void:
 	rotate(deg2rad(direction * Global.SNAKE_ROT_SPEED * get_physics_process_delta_time()))
 	_direction = _direction.rotated(deg2rad(direction * Global.SNAKE_ROT_SPEED * get_physics_process_delta_time()))
+	Event.emit_signal("snake_rotated")
 
 
 # using a timer is not recommended for < 0.01

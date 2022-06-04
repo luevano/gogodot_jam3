@@ -11,6 +11,7 @@ var _type_texture: Dictionary = {
 
 export(Type) var TYPE
 onready var _sprite: Sprite = $Sprite
+var location: Vector2
 
 
 func _ready():
@@ -19,5 +20,5 @@ func _ready():
 
 
 func _on_body_entered(body: Node) -> void:
-	Event.emit_signal("food_eaten", TYPE)
+	Event.emit_signal("food_eaten", TYPE, location)
 	queue_free()

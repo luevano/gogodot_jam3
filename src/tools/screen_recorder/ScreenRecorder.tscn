@@ -1,10 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/GifMaker/GifRectangle.gd" type="Script" id=1]
-[ext_resource path="res://tools/screen_recorder.gd" type="Script" id=2]
+[ext_resource path="res://tools/screen_recorder/screen_recorder.gd" type="Script" id=2]
 [ext_resource path="res://addons/GifMaker/GifRecorder.gd" type="Script" id=3]
 
 [node name="ScreenRecorder" type="CanvasLayer"]
+layer = 0
 script = ExtResource( 2 )
 
 [node name="Control" type="Control" parent="."]

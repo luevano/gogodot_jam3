@@ -13,6 +13,7 @@ var tail_segment: PathFollow2D
 # didn't konw how to name this, basically holds the current path lenght
 # 	whenever the add body segment, and we use this stack to add body parts
 var body_segment_queue: Array
+# var distance_to_first_segment: float
 
 
 func _ready():
@@ -23,11 +24,18 @@ func _ready():
 	Event.connect("snake_added_initial_segments", self, "_on_snake_added_initial_segments")
 
 	Event.connect("food_eaten", self, "_on_food_eaten")
+	# need to always set a new curve when ready, so when restarting it's af resh curve
+	path.curve = Curve2D.new()
 
 
 func _physics_process(delta: float) -> void:
-	if body_segment_queue.size() != 0:
+	if body_segment_queue.size() != 0 and current_body_segments > max_body_initial_segments:
 		_add_new_segment()
+
+	# if body_segment_stack.size() > 0:
+	# 	distance_to_first_segment = path.curve.get_baked_length() - body_segment_stack.front().offset
+	# 	if distance_to_first_segment >= Global.SNAKE_SEGMENT_SIZE:
+	# 		print(distance_to_first_segment)
 
 
 func _input(event: InputEvent) -> void:
@@ -35,9 +43,9 @@ func _input(event: InputEvent) -> void:
 		_add_segment_to_queue()
 
 
-func _draw() -> void:
-	if path.curve.get_baked_points().size() >= 2:
-		draw_polyline(path.curve.get_baked_points(), Color.aquamarine, 1, true)
+# func _draw() -> void:
+# 	if path.curve.get_baked_points().size() >= 2:
+# 		draw_polyline(path.curve.get_baked_points(), Color.aquamarine, 1, true)
 
 
 func _add_new_segment() -> void:
@@ -83,7 +91,7 @@ func _add_segment_to_queue() -> void:
 func _on_snake_path_new_point(coordinates: Vector2) -> void:
 	path.curve.add_point(coordinates)
 	# update call is to draw curve as there are new points to the path's curve
-	update()
+	# update()
 
 	if current_body_segments < max_body_initial_segments:
 		_add_initial_segment(BODY_SEGMENT_NP)
@@ -101,5 +109,5 @@ func _on_snake_added_initial_segments() -> void:
 	set_process_input(true)
 
 
-func _on_food_eaten(type: int) -> void:
+func _on_food_eaten(type: int, location: Vector2) -> void:
 	_add_segment_to_queue()
