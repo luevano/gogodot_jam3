@@ -5,10 +5,17 @@ enum {
 	RIGHT=1
 }
 
+onready var tongue_sprite: AnimatedSprite = $Tongue
+
 var _initial_speed: float = Global.SNAKE_SPEED
 var velocity: Vector2 = Vector2.ZERO
 var _direction: Vector2 = Vector2.UP
 var _time_elapsed: float = 0.0
+
+
+func _ready() -> void:
+	Event.connect("food_eaten", self, "_on_food_eaten")
+	tongue_sprite.visible = false
 
 
 func _physics_process(delta: float) -> void:
@@ -36,3 +43,13 @@ func _handle_time_elapsed(delta: float) -> void:
 		Event.emit_signal("snake_path_new_point", global_position)
 		_time_elapsed = 0.0
 	_time_elapsed += delta
+
+
+func _on_food_eaten(properties: Dictionary) -> void:
+	print("tongue food eaten")
+	if not tongue_sprite.visible:
+		tongue_sprite.visible = true
+	tongue_sprite.play()
+	yield(tongue_sprite, "animation_finished")
+	tongue_sprite.stop()
+	tongue_sprite.frame = 0
