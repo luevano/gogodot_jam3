@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/under.png-2db90a564085e100d8ec82ea8500cf5d.stex"
+path="res://.import/grow_progress_icon.png-3e4c84862319cfedeea45e4e79c3d47f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/hud/progress_bars/sprites/under.png"
-dest_files=[ "res://.import/under.png-2db90a564085e100d8ec82ea8500cf5d.stex" ]
+source_file="res://ui/hud/progress_bars/sprites/grow_progress_icon.png"
+dest_files=[ "res://.import/grow_progress_icon.png-3e4c84862319cfedeea45e4e79c3d47f.stex" ]
 
 [params]
 

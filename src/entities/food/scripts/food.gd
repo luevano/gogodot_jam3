@@ -43,6 +43,7 @@ func set_property(property: String, value) -> void:
 
 func _set_properties() -> void:
 	set_property("points", points)
+	set_property("global_position", global_position)
 
 
 func randomize_stats() -> void:

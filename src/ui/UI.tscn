@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/ui.gd" type="Script" id=1]
+[ext_resource path="res://ui/hud/progress_bars/sprites/grow_progress_icon.png" type="Texture" id=2]
 [ext_resource path="res://ui/hud/snake/scenes/SnakeHUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/hud/progress_bars/scenes/GrowthProgress.tscn" type="PackedScene" id=4]
 
@@ -18,21 +19,27 @@ margin_right = 124.0
 margin_bottom = 44.0
 
 [node name="VBox" type="VBoxContainer" parent="Root/StatsHUD"]
-margin_right = 120.0
-margin_bottom = 40.0
+custom_constants/separation = 2
 
 [node name="SnakeHUD" parent="Root/StatsHUD/VBox" instance=ExtResource( 3 )]
-margin_right = 120.0
+margin_right = 30.0
 margin_bottom = 8.0
 
 [node name="HBoxProgressBars" type="HBoxContainer" parent="Root/StatsHUD/VBox"]
-margin_top = 12.0
-margin_right = 120.0
-margin_bottom = 16.0
+margin_top = 10.0
+margin_right = 30.0
+margin_bottom = 18.0
+custom_constants/separation = 2
+
+[node name="GrowthProgressIcon" type="TextureRect" parent="Root/StatsHUD/VBox/HBoxProgressBars"]
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 2 )
 
 [node name="GrowthProgress" parent="Root/StatsHUD/VBox/HBoxProgressBars" instance=ExtResource( 4 )]
-margin_right = 20.0
-margin_bottom = 4.0
+margin_left = 10.0
+margin_right = 30.0
+margin_bottom = 8.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Root"]
 anchor_top = 1.0
