@@ -1,5 +1,6 @@
 extends Node
 
+var GAME_NODE: PackedScene = preload("res://Game.tscn")
 var GAME_SCALE: float = 2.0
 var TILE_SIZE: int = 16
 var WORLD_TILE_PATH: int = 0

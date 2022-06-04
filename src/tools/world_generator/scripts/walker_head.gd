@@ -2,8 +2,8 @@ extends Node2D
 
 export(NodePath) var TILEMAP_NP: NodePath
 export(PackedScene) var WALKER_UNIT_NP: PackedScene
-export(int, 5, 100, 1) var starting_unit_count: int = 5
-export(int, 5, 10, 1) var initial_safe_zone_size: int = 5
+export(int, 5, 100, 1) var STARTING_UNIT_COUNT: int = 5
+export(int, 3, 10, 1) var INITIAL_SAFE_ZONE_SIZE: int = 3
 
 onready var tilemap: TileMap = get_node(TILEMAP_NP)
 
@@ -24,14 +24,14 @@ func _ready() -> void:
 
 
 func _place_safe_zone() -> void:
-	for i in initial_safe_zone_size:
-		for j in initial_safe_zone_size:
+	var size: int = INITIAL_SAFE_ZONE_SIZE
+	for i in range(-size, size):
+		for j in range(-size, size):
 			tilemap.set_cell(i, j, Global.WORLD_TILE_PATH)
-			tilemap.set_cell(-i, -j, Global.WORLD_TILE_PATH)
 
 
 func _spawn_walker_units() -> void:
-	for i in starting_unit_count:
+	for i in STARTING_UNIT_COUNT:
 		_spawn_walker_unit(Vector2.ZERO)
 
 

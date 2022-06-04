@@ -1,6 +1,7 @@
 extends Node
 
 signal game_start
+signal game_restart
 signal game_over
 
 signal snake_path_new_point(coordinates)

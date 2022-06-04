@@ -46,7 +46,6 @@ func _handle_time_elapsed(delta: float) -> void:
 
 
 func _on_food_eaten(properties: Dictionary) -> void:
-	print("tongue food eaten")
 	if not tongue_sprite.visible:
 		tongue_sprite.visible = true
 	tongue_sprite.play()
