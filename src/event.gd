@@ -14,6 +14,15 @@ signal snake_segment_body_entered(body)
 signal snake_rotated
 signal snake_growth_progress(progress)
 
+signal snake_started_dash
+signal snake_finished_dash
+
+signal snake_started_slow
+signal snake_finished_slow
+
+signal snake_started_jump
+signal snake_finished_jump
+
 signal food_placing_new_food(special, type)
 signal food_placed_new_food(properties)
 signal food_eaten(properties)

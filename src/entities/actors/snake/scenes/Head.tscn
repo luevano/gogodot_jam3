@@ -1,8 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entities/actors/snake/sprites/head.png" type="Texture" id=1]
 [ext_resource path="res://entities/actors/snake/scripts/head.gd" type="Script" id=2]
 [ext_resource path="res://entities/actors/snake/sprites/tongue.png" type="Texture" id=3]
+[ext_resource path="res://entities/actors/snake/scripts/state_machine.gd" type="Script" id=4]
+[ext_resource path="res://entities/actors/snake/scripts/normal_state.gd" type="Script" id=5]
+[ext_resource path="res://entities/actors/snake/scripts/dash_state.gd" type="Script" id=6]
+[ext_resource path="res://entities/actors/snake/scripts/slow_state.gd" type="Script" id=7]
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
@@ -34,6 +38,20 @@ radius = 2.0
 [node name="Head" type="KinematicBody2D"]
 collision_mask = 262
 script = ExtResource( 2 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="NormalState" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="DashState" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
+
+[node name="SlowState" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+
+[node name="JumpState" type="Node" parent="StateMachine"]
 
 [node name="Tongue" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -5 )

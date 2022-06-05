@@ -1,11 +1,13 @@
 extends Node2D
 
-export(NodePath) var TILEMAP_NP: NodePath
+export(NodePath) var GROUND_TILEMAP_NP: NodePath
+export(NodePath) var WALL_TILEMAP_NP: NodePath
 export(PackedScene) var WALKER_UNIT_NP: PackedScene
 export(int, 4, 100, 1) var STARTING_UNIT_COUNT: int = 6
 export(int, 2, 10, 1) var INITIAL_SAFE_ZONE_SIZE: int = 2
 
-onready var tilemap: TileMap = get_node(TILEMAP_NP)
+onready var ground_tilemap: TileMap = get_node(GROUND_TILEMAP_NP)
+onready var wall_tilemap: TileMap = get_node(WALL_TILEMAP_NP)
 
 var max_x: int = 0
 var max_y: int = 0
@@ -36,7 +38,11 @@ func _place_safe_zone() -> void:
 	var size: int = INITIAL_SAFE_ZONE_SIZE
 	for i in range(-size, size):
 		for j in range(-size, size):
-			tilemap.set_cell(i, j, Global.WORLD_TILE_PATH)
+			ground_tilemap.set_cell(i, j, get_random_tile())
+
+
+func get_random_tile() -> int:
+	return randi() % Global.GROUND_TILE_AMOUNT
 
 
 func _spawn_walker_units() -> void:
@@ -55,17 +61,18 @@ func _spawn_walker_unit(spawn_position: Vector2) -> void:
 func _fill_empty_space() -> void:
 	var locations: Array = _get_empty_cells_location()
 	for location in locations:
-		tilemap.set_cellv(location, Global.WORLD_TILE_WALL)
+		# doesn't matter which index is set, as long as its form the wall tilemap
+		wall_tilemap.set_cellv(location, 0)
 
 
 func _get_empty_cells_location() -> Array:
 	var locations: Array = []
-	var rect: Rect2 = tilemap.get_used_rect()
+	var rect: Rect2 = ground_tilemap.get_used_rect()
 	var margin: int = map_margin
 	for x in range(-margin, rect.size.x + margin):
 		for y in range (-margin, rect.size.y + margin):
 			var location: Vector2 = Vector2(rect.position.x + x, rect.position.y + y)
-			if tilemap.get_cell(int(location.x), int(location.y)) == TileMap.INVALID_CELL:
+			if ground_tilemap.get_cell(int(location.x), int(location.y)) == TileMap.INVALID_CELL:
 				locations.append(location)
 
 	return locations

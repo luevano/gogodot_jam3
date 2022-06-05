@@ -9,49 +9,30 @@ onready var tongue_sprite: AnimatedSprite = $Tongue
 
 var _initial_speed: float = Global.SNAKE_SPEED
 var velocity: Vector2 = Vector2.ZERO
-var _direction: Vector2 = Vector2.UP
+var direction: Vector2 = Vector2.UP
 var _time_elapsed: float = 0.0
+
+var can_dash: bool = true
+var can_slow: bool = true
+var can_jump: bool = true
 
 
 func _ready() -> void:
 	Event.connect("food_eaten", self, "_on_food_eaten")
+	Event.connect("snake_started_dash", self, "_on_snake_started_dash")
+	Event.connect("snake_started_slow", self, "_on_snake_started_slow")
+	Event.connect("snake_started_jump", self, "_on_snake_started_jump")
 	tongue_sprite.visible = false
 
 
-func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("move_left"):
-		_rotate_to(LEFT)
-	if Input.is_action_pressed("move_right"):
-		_rotate_to(RIGHT)
-
-	velocity = _direction * Global.SNAKE_SPEED
-
-	# not sure if needed, worked wonders when using a Node2D instead of KB2D
-	velocity = move_and_slide(velocity)
-
-	# slow down on collisions, so it isn't as unfair
-	if get_last_slide_collision():
-		var speed: float = velocity.length()
-		Global.SNAKE_SPEED = speed
-	else:
-		Global.SNAKE_SPEED = Global.SNAKE_SPEED_BACKUP
-
-	# handle slow speeds
-	if Global.SNAKE_SPEED <= Global.SNAKE_SPEED_BACKUP / 4.0:
-		Global.SNAKE_SPEED = Global.SNAKE_SPEED_BACKUP
-		Event.emit_signal("game_over")
-
-	_handle_time_elapsed(delta)
-
-
-func _rotate_to(direction: int) -> void:
-	rotate(deg2rad(direction * Global.SNAKE_ROT_SPEED * get_physics_process_delta_time()))
-	_direction = _direction.rotated(deg2rad(direction * Global.SNAKE_ROT_SPEED * get_physics_process_delta_time()))
+func rotate_to(_direction: int) -> void:
+	rotate(deg2rad(_direction * Global.SNAKE_ROT_SPEED * get_physics_process_delta_time()))
+	direction = direction.rotated(deg2rad(_direction * Global.SNAKE_ROT_SPEED * get_physics_process_delta_time()))
 	Event.emit_signal("snake_rotated")
 
 
 # using a timer is not recommended for < 0.01
-func _handle_time_elapsed(delta: float) -> void:
+func handle_time_elapsed(delta: float) -> void:
 	if _time_elapsed >= Global.SNAKE_POSITION_UPDATE_INTERVAL:
 		Event.emit_signal("snake_path_new_point", global_position)
 		_time_elapsed = 0.0
@@ -65,3 +46,21 @@ func _on_food_eaten(properties: Dictionary) -> void:
 	yield(tongue_sprite, "animation_finished")
 	tongue_sprite.stop()
 	tongue_sprite.frame = 0
+
+
+func _on_snake_started_dash() -> void:
+	can_dash = false
+	yield(get_tree().create_timer(Global.SNAKE_DASH_COOLDOWN), "timeout")
+	can_dash = true
+
+
+func _on_snake_started_slow() -> void:
+	can_slow = false
+	yield(get_tree().create_timer(Global.SNAKE_SLOW_COOLDOWN), "timeout")
+	can_slow = true
+
+
+func _on_snake_started_jump() -> void:
+	can_jump = false
+	yield(get_tree().create_timer(Global.SNAKE_JUMP_COOLDOWN), "timeout")
+	can_jump = true

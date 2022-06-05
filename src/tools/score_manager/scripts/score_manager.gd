@@ -49,7 +49,7 @@ func _process_points(points: int) -> int:
 func _spawn_added_score_text(points: int, location: Vector2) -> void:
 	var label: ScoreLabel = SCORE_LABEL.instance()
 	add_child(label)
-	label.set_properties(points, Color.red, location)
+	label.set_properties(points, Color.aquamarine, location)
 
 
 func _spawn_added_segment_text(amount: int) -> void:

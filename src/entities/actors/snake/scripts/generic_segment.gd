@@ -21,4 +21,4 @@ func _on_body_entered(body: Node) -> void:
 func _on_snake_rotated() -> void:
 	# this is just random, i need to offset a tiny bit whenever the snake rotates
 	#	so that the first body segmetn doesn't catch up with the head
-	offset -= Global.SNAKE_SPEED * pow(get_physics_process_delta_time(), 2)
+	offset -= 0.75 * Global.SNAKE_SPEED * pow(get_physics_process_delta_time(), 2)

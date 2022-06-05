@@ -30,7 +30,7 @@ var walk_straight_length: float
 func start(id: int) -> void:
 	Event.emit_signal("world_gen_walker_started", id)
 	_walker_head = get_parent()
-	_tilemap = _walker_head.tilemap
+	_tilemap = _walker_head.ground_tilemap
 	_randomize_stats()
 
 	var path_steps: Array = _get_path_steps()
@@ -70,11 +70,11 @@ func _set_path_tiles(path_steps: Array) -> bool:
 	# get initial tile location
 	var location: Vector2 = get_parent().global_position * Global.TILE_SIZE
 	var move_direction: Vector2
-	_set_tile(location, 0)
+	_set_tile(location, _walker_head.get_random_tile())
 	for step in path_steps:
 		move_direction = direction[step]
 		location += move_direction * Global.TILE_SIZE
-		_set_tile(location, Global.WORLD_TILE_PATH)
+		_set_tile(location, _walker_head.get_random_tile())
 
 		if randf() < birth_chance and not given_birth:
 			Event.emit_signal("world_gen_spawn_walker_unit", location)
