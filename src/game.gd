@@ -12,6 +12,8 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("restart"):
 		Event.emit_signal("game_restart")
+	if event.is_action_pressed("debug"):
+		Event.emit_signal("toggle_debug")
 
 
 func _on_snake_segment_body_entered(body: Node) -> void:

@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/food/scripts/food_manager.gd"
 }, {
+"base": "Food",
+"class": "FoodSpecial",
+"language": "GDScript",
+"path": "res://entities/food/scripts/food_special.gd"
+}, {
 "base": "Node",
 "class": "GifDecoder",
 "language": "GDScript",
@@ -68,6 +73,7 @@ _global_script_class_icons={
 "Food": "",
 "FoodBasic": "",
 "FoodManager": "",
+"FoodSpecial": "",
 "GifDecoder": "",
 "GifRecorder": "res://addons/GifMaker/gif.svg",
 "GifRectangle": "res://addons/GifMaker/GifRectangle.svg",
@@ -159,14 +165,14 @@ move_right={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
  ]
 }
-add_body_part={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
- ]
-}
 restart={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+debug={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

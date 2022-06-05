@@ -46,6 +46,17 @@ func get_stats() -> Dictionary:
 
 
 func set_stats(stats: Dictionary) -> void:
-	var current_stats: Dictionary = get_stats()
-	for i in stats:
-		current_stats[i] = stats[i]
+		points = stats["points"]
+		segments = stats["segments"]
+		dash_points = stats["dash_points"]
+		slow_points = stats["slow_points"]
+		jump_points = stats["jump_points"]
+		dash_segments = stats["dash_segments"]
+		slow_segments = stats["slow_segments"]
+		jump_segments = stats["jump_segments"]
+		dash_percentage = stats["dash_percentage"]
+		slow_percentage = stats["slow_percentage"]
+		jump_lenght = stats["jump_lenght"]
+		trait_dash = stats["trait_dash"]
+		trait_slow = stats["trait_slow"]
+		trait_jump = stats["trait_jump"]

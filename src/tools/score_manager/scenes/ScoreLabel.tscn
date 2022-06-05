@@ -18,7 +18,7 @@ margin_right = 12.0
 margin_bottom = 13.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 1 )
-text = "x1"
+text = "+1"
 
 [node name="Timer" type="Timer" parent="Hbox/Label"]
 one_shot = true

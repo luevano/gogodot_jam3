@@ -16,4 +16,6 @@ var SNAKE_SEGMENT_SIZE: float = 6.0
 
 var POINTS_TO_GROW: int = 10
 
-var MAX_BASIC_FOOD: int = 30
+# percentage of the available tiles
+var MAX_BASIC_FOOD: float = 0.05
+var MAX_SPECIAL_FOOD: float = 0.01

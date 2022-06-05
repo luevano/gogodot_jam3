@@ -3,6 +3,7 @@ extends Node
 signal game_start
 signal game_restart
 signal game_over
+signal toggle_debug
 
 signal snake_path_new_point(coordinates)
 signal snake_add_new_segment(amount)
@@ -13,8 +14,8 @@ signal snake_segment_body_entered(body)
 signal snake_rotated
 signal snake_growth_progress(progress)
 
-signal food_placing_new_food(type)
-signal food_placed_new_food(type, location)
+signal food_placing_new_food(special, type)
+signal food_placed_new_food(properties)
 signal food_eaten(properties)
 signal food_timed_out(properties)
 

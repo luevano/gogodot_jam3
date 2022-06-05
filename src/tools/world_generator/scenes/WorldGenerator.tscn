@@ -48,7 +48,6 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [node name="WorldGenerator" type="Node2D"]
 script = ExtResource( 5 )
-TILEMAP_NP = NodePath("TileMap")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )

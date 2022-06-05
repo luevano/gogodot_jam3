@@ -14,7 +14,7 @@ var texture: Dictionary = {
 }
 
 var alive_time: float = 2.0
-var fmt: String = "x%s"
+var fmt: String = "+%s"
 var points: int
 
 
@@ -25,7 +25,6 @@ func _ready():
 
 
 func set_properties(_points: int, color: Color, location: Vector2, type: int=-1) -> void:
-	print("Constructing")
 	points = _points
 	label.text = fmt % points
 	label.add_color_override("font_color", color)

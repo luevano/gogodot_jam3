@@ -11,6 +11,7 @@ var mutation_stats: Array = [
 ]
 
 var last_snake_pos: Vector2 = Vector2.ZERO
+var snake_location_offset: Vector2 = Vector2(8.0, 8.0)
 
 
 func _ready():
@@ -55,7 +56,7 @@ func _spawn_added_segment_text(amount: int) -> void:
 	if amount > 0:
 		var label: ScoreLabel = SCORE_LABEL.instance()
 		add_child(label)
-		label.set_properties(amount, Color.green, last_snake_pos, ScoreLabel.Type.BODY_SEGMENT)
+		label.set_properties(amount, Color.green, last_snake_pos + snake_location_offset, ScoreLabel.Type.BODY_SEGMENT)
 
 
 func _on_snake_path_new_point(coordinates: Vector2) -> void:
@@ -63,5 +64,26 @@ func _on_snake_path_new_point(coordinates: Vector2) -> void:
 
 
 func _on_game_over() -> void:
-	print("Show comparison.")
+	var max_stats: Stats = _get_max_stats()
+	SaveData.save_data(max_stats)
 	Event.emit_signal("display_stats", initial_stats, stats, mutation_stats)
+
+
+func _get_max_stats() -> Stats:
+	var old_stats_dict: Dictionary = initial_stats.get_stats()
+	var new_stats_dict: Dictionary = stats.get_stats()
+	var max_stats: Stats = Stats.new()
+	var max_stats_dict: Dictionary = max_stats.get_stats()
+	var bool_stats: Array = [
+		"trait_dash",
+		"trait_slow",
+		"trait_jump"
+	]
+
+	for i in old_stats_dict:
+		if bool_stats.has(i):
+			max_stats_dict[i] = old_stats_dict[i] or new_stats_dict[i]
+		else:
+			max_stats_dict[i] = max(old_stats_dict[i], new_stats_dict[i])
+	max_stats.set_stats(max_stats_dict)
+	return max_stats

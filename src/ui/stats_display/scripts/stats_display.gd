@@ -17,7 +17,6 @@ func _on_display_stats(old_stats: Stats, new_stats: Stats, mut_stats: Array) -> 
 	var mut_stats_dict: Array = []
 	for i in mut_stats:
 		mut_stats_dict.append(i)
-		print(i)
 
 	var type: int
 	var prefix: String

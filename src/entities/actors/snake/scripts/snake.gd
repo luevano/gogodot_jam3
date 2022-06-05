@@ -15,12 +15,14 @@ var tail_segment: PathFollow2D
 # didn't konw how to name this, basically holds the current path lenght
 # 	whenever the add body segment, and we use this stack to add body parts
 var body_segment_queue: Array
-# var distance_to_first_segment: float
+
+var debug: bool = false
 
 
 func _ready():
 	set_physics_process(false)
 	set_process_input(false)
+	Event.connect("toggle_debug", self, "_on_toggle_debug")
 	Event.connect("snake_path_new_point", self, "_on_snake_path_new_point")
 	Event.connect("snake_add_new_segment", self, "_on_snake_add_new_segment")
 	Event.connect("snake_added_new_segment", self, "_on_snake_added_new_segment")
@@ -41,14 +43,10 @@ func _physics_process(delta: float) -> void:
 	# 		print(distance_to_first_segment)
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("add_body_part"):
-		_add_segment_to_queue()
-
-
-# func _draw() -> void:
-# 	if path.curve.get_baked_points().size() >= 2:
-# 		draw_polyline(path.curve.get_baked_points(), Color.aquamarine, 1, true)
+func _draw() -> void:
+	if debug:
+		if path.curve.get_baked_points().size() >= 2:
+			draw_polyline(path.curve.get_baked_points(), Color.aquamarine, 1, true)
 
 
 func _add_new_segment() -> void:
@@ -95,7 +93,8 @@ func _add_segment_to_queue() -> void:
 func _on_snake_path_new_point(coordinates: Vector2) -> void:
 	path.curve.add_point(coordinates)
 	# update call is to draw curve as there are new points to the path's curve
-	# update()
+	if debug:
+		update()
 
 	if not finished_adding_initial_segments:
 		if current_body_segments < Global.SNAKE_INITIAL_SEGMENTS:
@@ -119,3 +118,7 @@ func _on_snake_added_initial_segments() -> void:
 func _on_snake_add_new_segment(amount: int) -> void:
 	for i in amount:
 		_add_segment_to_queue()
+
+
+func _on_toggle_debug() -> void:
+	debug = !debug
