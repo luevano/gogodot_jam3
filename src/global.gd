@@ -1,5 +1,6 @@
 extends Node
 
+var MAIN_MENU_NODE: PackedScene = preload("res://ui/main_menu/scenes/MainMenu.tscn")
 var GAME_NODE: PackedScene = preload("res://Game.tscn")
 var GAME_SCALE: float = 2.0
 var TILE_SIZE: int = 16
@@ -28,6 +29,9 @@ var SNAKE_JUMP_TIME: float = 0.5
 var SNAKE_JUMP_COOLDOWN: float = 4.0
 
 var POINTS_TO_GROW: int = 10
+var POINTS_TO_DASH: int = 10
+var POINTS_TO_SLOW: int = 10
+var POINTS_TO_JUMP: int = 10
 
 # percentage of the available tiles
 var MAX_BASIC_FOOD: float = 0.05

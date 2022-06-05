@@ -12,9 +12,11 @@ var velocity: Vector2 = Vector2.ZERO
 var direction: Vector2 = Vector2.UP
 var _time_elapsed: float = 0.0
 
-var can_dash: bool = true
-var can_slow: bool = true
-var can_jump: bool = true
+var stats: Stats = SaveData.get_stats()
+
+var can_dash: bool = false
+var can_slow: bool = false
+var can_jump: bool = false
 
 
 func _ready() -> void:
@@ -22,6 +24,12 @@ func _ready() -> void:
 	Event.connect("snake_started_dash", self, "_on_snake_started_dash")
 	Event.connect("snake_started_slow", self, "_on_snake_started_slow")
 	Event.connect("snake_started_jump", self, "_on_snake_started_jump")
+
+	print(stats.get_stats())
+	can_dash = stats.trait_dash
+	can_slow = stats.trait_slow
+	can_jump = stats.trait_jump
+
 	tongue_sprite.visible = false
 
 

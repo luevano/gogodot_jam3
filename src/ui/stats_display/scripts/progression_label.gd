@@ -3,6 +3,9 @@ extends MarginContainer
 
 enum Type {
 	BODY_SEGMENT,
+	DASH_SEGMENT,
+	SLOW_SEGMENT,
+	JUMP_SEGMENT,
 	EMPTY
 }
 
@@ -17,7 +20,10 @@ onready var texture_rect: TextureRect = $HBox/Center/VBox/TextureRect
 
 
 var textures: Dictionary = {
-	Type.BODY_SEGMENT: preload("res://ui/hud/progress_bars/sprites/grow_progress_icon.png"),
+	Type.BODY_SEGMENT: preload("res://ui/hud/progress_bars/sprites/grow/grow_progress_icon.png"),
+	Type.DASH_SEGMENT: preload("res://ui/hud/progress_bars/sprites/dash/dash_progress_icon.png"),
+	Type.SLOW_SEGMENT: preload("res://ui/hud/progress_bars/sprites/slow/slow_progress_icon.png"),
+	Type.JUMP_SEGMENT: preload("res://ui/hud/progress_bars/sprites/jump/jump_progress_icon.png"),
 	Type.EMPTY: preload("res://ui/stats_display/sprites/sep_8x8.png")
 }
 

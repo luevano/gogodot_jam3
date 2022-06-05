@@ -19,6 +19,7 @@ func exit():
 
 
 func physics_process(delta: float) -> void:
+	fsm.rotate_on_input()
 	fsm.player.velocity = fsm.player.direction * Global.SNAKE_SPEED
 	fsm.player.velocity = fsm.player.move_and_slide(fsm.player.velocity)
 

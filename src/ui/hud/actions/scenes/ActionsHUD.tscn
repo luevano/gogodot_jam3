@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://themes/Theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/hud/actions/sprites/space2.png" type="Texture" id=3]
+[ext_resource path="res://ui/hud/actions/sprites/space3.png" type="Texture" id=4]
+[ext_resource path="res://ui/hud/actions/sprites/w3.png" type="Texture" id=5]
+[ext_resource path="res://ui/hud/actions/sprites/w2.png" type="Texture" id=6]
+[ext_resource path="res://ui/hud/actions/sprites/s3.png" type="Texture" id=7]
+[ext_resource path="res://ui/hud/actions/sprites/s2.png" type="Texture" id=8]
+[ext_resource path="res://ui/hud/actions/scripts/actions_hud.gd" type="Script" id=11]
+
+[node name="ActionsHUD" type="MarginContainer"]
+theme = ExtResource( 1 )
+script = ExtResource( 11 )
+
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_right = 44.0
+margin_bottom = 44.0
+custom_constants/separation = -2
+
+[node name="WHBox" type="HBoxContainer" parent="VBox"]
+margin_right = 44.0
+margin_bottom = 16.0
+
+[node name="W" type="TextureButton" parent="VBox/WHBox"]
+margin_right = 16.0
+margin_bottom = 16.0
+disabled = true
+texture_normal = ExtResource( 6 )
+texture_disabled = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="VBox/WHBox"]
+margin_left = 20.0
+margin_top = 1.0
+margin_right = 44.0
+margin_bottom = 14.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Dash"
+
+[node name="SHBox" type="HBoxContainer" parent="VBox"]
+margin_top = 14.0
+margin_right = 44.0
+margin_bottom = 30.0
+
+[node name="S" type="TextureButton" parent="VBox/SHBox"]
+margin_right = 16.0
+margin_bottom = 16.0
+disabled = true
+texture_normal = ExtResource( 8 )
+texture_disabled = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="VBox/SHBox"]
+margin_left = 20.0
+margin_top = 1.0
+margin_right = 44.0
+margin_bottom = 14.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Slow"
+
+[node name="SpaceHBox" type="HBoxContainer" parent="VBox"]
+margin_top = 28.0
+margin_right = 44.0
+margin_bottom = 44.0
+
+[node name="Space" type="TextureButton" parent="VBox/SpaceHBox"]
+margin_right = 16.0
+margin_bottom = 16.0
+disabled = true
+texture_normal = ExtResource( 3 )
+texture_disabled = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBox/SpaceHBox"]
+margin_left = 20.0
+margin_top = 1.0
+margin_right = 44.0
+margin_bottom = 14.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Jump"

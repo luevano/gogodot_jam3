@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://entities/actors/snake/sprites/head.png" type="Texture" id=1]
 [ext_resource path="res://entities/actors/snake/scripts/head.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://entities/actors/snake/scripts/normal_state.gd" type="Script" id=5]
 [ext_resource path="res://entities/actors/snake/scripts/dash_state.gd" type="Script" id=6]
 [ext_resource path="res://entities/actors/snake/scripts/slow_state.gd" type="Script" id=7]
+[ext_resource path="res://entities/actors/snake/scripts/jump_state.gd" type="Script" id=8]
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
@@ -52,6 +53,7 @@ script = ExtResource( 6 )
 script = ExtResource( 7 )
 
 [node name="JumpState" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
 
 [node name="Tongue" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -5 )

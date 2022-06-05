@@ -35,8 +35,14 @@ func _on_display_stats(old_stats: Stats, new_stats: Stats, mut_stats: Array) -> 
 func _get_type(stat_name: String) -> int:
 	var type: int
 	match stat_name:
-		"segments":
+		"points", "segments":
 			type = ProgressionLabel.Type.BODY_SEGMENT
+		"dash_points", "dash_segments":
+			type = ProgressionLabel.Type.DASH_SEGMENT
+		"slow_points", "slow_segments":
+			type = ProgressionLabel.Type.SLOW_SEGMENT
+		"jump_points", "jump_segments":
+			type = ProgressionLabel.Type.JUMP_SEGMENT
 		_:
 			type = ProgressionLabel.Type.EMPTY
 	return type
@@ -47,6 +53,12 @@ func _get_prefix(stat_name: String) -> String:
 	match stat_name:
 		"points":
 			prefix = "points"
+		"dash_points":
+			prefix = "points"
+		"slow_points":
+			prefix = "points"
+		"jump_points":
+			prefix = "points"
 		_:
 			prefix = ""
 	return prefix
@@ -56,6 +68,12 @@ func _should_print(stat_name: String, stats: Dictionary) -> bool:
 	var to_print: Array = [
 		"points",
 		"segments",
+		"dash_points",
+		"dash_segments",
+		"slow_points",
+		"slow_segments",
+		"jump_points",
+		"jump_segments"
 	]
 	var to_print_check: Array = [
 		"dash_percentage",

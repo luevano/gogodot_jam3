@@ -40,18 +40,19 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("move_left"):
-		player.rotate_to(player.LEFT)
-	if Input.is_action_pressed("move_right"):
-		player.rotate_to(player.RIGHT)
-
 	# state specific code, move_and_slide is called here
 	if state.has_method("physics_process"):
 		state.physics_process(delta)
 
 	handle_slow_speeds()
-
 	player.handle_time_elapsed(delta)
+
+
+func rotate_on_input() -> void:
+	if Input.is_action_pressed("move_left"):
+		player.rotate_to(player.LEFT)
+	if Input.is_action_pressed("move_right"):
+		player.rotate_to(player.RIGHT)
 
 
 func slow_down_on_collisions(speed_backup: float):

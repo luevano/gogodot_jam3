@@ -3,6 +3,7 @@ extends Node
 signal game_start
 signal game_restart
 signal game_over
+signal game_to_main_menu
 signal toggle_debug
 
 signal snake_path_new_point(coordinates)
@@ -13,6 +14,9 @@ signal snake_added_initial_segments
 signal snake_segment_body_entered(body)
 signal snake_rotated
 signal snake_growth_progress(progress)
+signal snake_dash_progress(progress)
+signal snake_slow_progress(progress)
+signal snake_jump_progress(progress)
 
 signal snake_started_dash
 signal snake_finished_dash

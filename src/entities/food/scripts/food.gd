@@ -21,7 +21,7 @@ func update_texture() -> void:
 	_sprite.texture = texture[properties["type"]]
 
 
-func set_properties(pos: Vector2, loc: Vector2, special: bool, type: int, points: int=1, ttl: float = -1.0) -> void:
+func set_properties(pos: Vector2, loc: Vector2, special: bool, type: int, points: int=1, special_points: int=1, ttl: float = -1.0) -> void:
 	properties["global_position"] = pos
 	global_position = pos
 	properties["location"] = loc
@@ -29,6 +29,7 @@ func set_properties(pos: Vector2, loc: Vector2, special: bool, type: int, points
 	properties["type"] = type
 
 	properties["points"] = points
+	properties["special_points"] = special_points
 	properties["ttl"] = ttl
 	if properties["ttl"] != -1.0:
 		timer.wait_time = properties["ttl"]

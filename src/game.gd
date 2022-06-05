@@ -6,12 +6,15 @@ onready var _snake: Node2D = $Snake
 func _ready() -> void:
 	Event.connect("game_over", self, "_on_game_over")
 	Event.connect("game_restart", self, "_on_game_restart")
+	Event.connect("game_to_main_menu", self, "_on_game_to_main_menu")
 	Event.connect("snake_segment_body_entered", self, "_on_snake_segment_body_entered")
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("restart"):
 		Event.emit_signal("game_restart")
+	if event.is_action_pressed("main_menu"):
+		Event.emit_signal("game_to_main_menu")
 	if event.is_action_pressed("debug"):
 		Event.emit_signal("toggle_debug")
 
@@ -37,3 +40,8 @@ func _on_game_over() -> void:
 func _on_game_restart() -> void:
 	print("game_restart")
 	get_tree().change_scene_to(Global.GAME_NODE)
+
+
+func _on_game_to_main_menu() -> void:
+	print("game_to_main_menu")
+	get_tree().change_scene_to(Global.MAIN_MENU_NODE)

@@ -1,11 +1,9 @@
 extends MarginContainer
 
 export(NodePath) var START_OPTION_NP: NodePath
-export(NodePath) var SETTINGS_OPTION_NP: NodePath
 export(NodePath) var EXIT_OPTION_NP: NodePath
 
 onready var start_option: MenuOption = get_node(START_OPTION_NP)
-onready var settings_option: MenuOption = get_node(SETTINGS_OPTION_NP)
 onready var exit_option: MenuOption = get_node(EXIT_OPTION_NP)
 
 onready var main: Node2D = get_parent().get_parent()
@@ -13,7 +11,6 @@ onready var main: Node2D = get_parent().get_parent()
 
 enum Option {
 	START,
-	SETTINGS,
 	EXIT
 }
 
@@ -24,7 +21,6 @@ enum {
 
 onready var options: Dictionary = {
 	Option.START: start_option,
-	Option.SETTINGS: settings_option,
 	Option.EXIT: exit_option
 }
 
@@ -34,7 +30,6 @@ var current_selection: int = Option.START
 func _ready():
 	Event.connect("game_start", self, "_on_game_start")
 	start_option.type = Option.START
-	settings_option.type = Option.SETTINGS
 	exit_option.type = Option.EXIT
 
 
@@ -49,8 +44,6 @@ func _input(event: InputEvent) -> void:
 		match current_selection:
 			Option.START:
 				Event.emit_signal("game_start")
-			Option.SETTINGS:
-				print("Option TEST.")
 			Option.EXIT:
 				get_tree().quit()
 

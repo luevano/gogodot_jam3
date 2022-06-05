@@ -41,7 +41,10 @@ func _place_new_basic_food() -> void:
 	var loc: Vector2 = pos_loc[1]
 
 	# need to set the position first, else it will spawn on the middle and the moved
-	food.set_properties(pos, loc, false, type)
+	if type == FoodBasic.Type.RAT:
+		food.set_properties(pos, loc, false, type, Global.POINTS_TO_GROW / 2)
+	else:
+		food.set_properties(pos, loc, false, type)
 	add_child(food)
 	food.update_texture()
 	current_basic_food.append(loc)
@@ -57,7 +60,7 @@ func _place_new_special_food() -> void:
 	var loc: Vector2 = pos_loc[1]
 
 	# need to set the position first, else it will spawn on the middle and the moved
-	food.set_properties(pos, loc, true, type, Global.POINTS_TO_GROW)
+	food.set_properties(pos, loc, true, type, Global.POINTS_TO_GROW, Global.POINTS_TO_GROW / Global.POINTS_TO_GROW)
 	add_child(food)
 	food.update_texture()
 	current_special_food.append(loc)
