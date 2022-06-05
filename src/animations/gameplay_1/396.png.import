@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/396.png-fef9d45d81f6f4f1ff8016f2d856052a.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://animations/gameplay_1/396.png"
+dest_files=[ "res://.import/396.png-fef9d45d81f6f4f1ff8016f2d856052a.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=false
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

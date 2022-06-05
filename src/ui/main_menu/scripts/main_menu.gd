@@ -2,11 +2,11 @@ extends MarginContainer
 
 export(NodePath) var START_OPTION_NP: NodePath
 export(NodePath) var EXIT_OPTION_NP: NodePath
+export(NodePath) var ANIMATION_NP: NodePath
 
 onready var start_option: MenuOption = get_node(START_OPTION_NP)
 onready var exit_option: MenuOption = get_node(EXIT_OPTION_NP)
-
-onready var main: Node2D = get_parent().get_parent()
+onready var animation: AnimatedSprite = get_node(ANIMATION_NP)
 
 
 enum Option {
@@ -31,6 +31,7 @@ func _ready():
 	Event.connect("game_start", self, "_on_game_start")
 	start_option.type = Option.START
 	exit_option.type = Option.EXIT
+	animation.play()
 
 
 func _input(event: InputEvent) -> void:
