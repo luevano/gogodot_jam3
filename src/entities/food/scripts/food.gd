@@ -47,7 +47,7 @@ func _set_properties() -> void:
 
 
 func randomize_stats() -> void:
-	points = int(rand_range(1, 30))
+	points = int(rand_range(1, 10))
 
 
 func _on_body_entered(body: Node) -> void:

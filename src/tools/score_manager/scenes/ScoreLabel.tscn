@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://fonts/MonogramExtended.tres" type="DynamicFont" id=1]
+[ext_resource path="res://tools/score_manager/scripts/score_label.gd" type="Script" id=2]
+[ext_resource path="res://ui/stats_display/sprites/sep_2x2.png" type="Texture" id=3]
+
+[node name="ScoreLabel" type="MarginContainer"]
+margin_bottom = 13.0
+script = ExtResource( 2 )
+
+[node name="Hbox" type="HBoxContainer" parent="."]
+margin_right = 16.0
+margin_bottom = 13.0
+custom_constants/separation = 2
+
+[node name="Label" type="Label" parent="Hbox"]
+margin_right = 12.0
+margin_bottom = 13.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "x1"
+
+[node name="Timer" type="Timer" parent="Hbox/Label"]
+one_shot = true
+
+[node name="Center" type="CenterContainer" parent="Hbox"]
+margin_left = 14.0
+margin_right = 16.0
+margin_bottom = 13.0
+
+[node name="VBox" type="VBoxContainer" parent="Hbox/Center"]
+margin_top = 5.0
+margin_right = 2.0
+margin_bottom = 7.0
+custom_constants/separation = 0
+
+[node name="Sep" type="TextureRect" parent="Hbox/Center/VBox"]
+margin_right = 2.0
+margin_bottom = 2.0
+texture = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="Hbox/Center/VBox"]
+visible = false
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = 4.0

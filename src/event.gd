@@ -22,3 +22,5 @@ signal world_gen_walker_started(id)
 signal world_gen_walker_finished(id)
 signal world_gen_walker_died(id)
 signal world_gen_spawn_walker_unit(location)
+
+signal display_stats(old_stats, new_stats, mut_stats)

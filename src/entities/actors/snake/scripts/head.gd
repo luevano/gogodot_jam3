@@ -28,6 +28,19 @@ func _physics_process(delta: float) -> void:
 
 	# not sure if needed, worked wonders when using a Node2D instead of KB2D
 	velocity = move_and_slide(velocity)
+
+	# slow down on collisions, so it isn't as unfair
+	if get_last_slide_collision():
+		var speed: float = velocity.length()
+		Global.SNAKE_SPEED = speed
+	else:
+		Global.SNAKE_SPEED = Global.SNAKE_SPEED_BACKUP
+
+	# handle slow speeds
+	if Global.SNAKE_SPEED <= Global.SNAKE_SPEED_BACKUP / 4.0:
+		Global.SNAKE_SPEED = Global.SNAKE_SPEED_BACKUP
+		Event.emit_signal("game_over")
+
 	_handle_time_elapsed(delta)
 
 

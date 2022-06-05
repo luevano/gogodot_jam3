@@ -6,6 +6,8 @@ export(PackedScene) var TAIL_SEGMENT_NP: PackedScene
 
 onready var path: Path2D = $Path
 
+var stats: Stats = SaveData.get_stats()
+
 var finished_adding_initial_segments: bool = false
 var current_body_segments: int = 0
 var body_segment_stack: Array
