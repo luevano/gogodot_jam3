@@ -25,7 +25,6 @@ func _ready() -> void:
 	Event.connect("snake_started_slow", self, "_on_snake_started_slow")
 	Event.connect("snake_started_jump", self, "_on_snake_started_jump")
 
-	print(stats.get_stats())
 	can_dash = stats.trait_dash
 	can_slow = stats.trait_slow
 	can_jump = stats.trait_jump
